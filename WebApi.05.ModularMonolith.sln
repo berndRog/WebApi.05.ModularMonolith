@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{3196A570-7C78-43FE-AAA4-41D2C283B0B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTest", "WebApiTest\WebApiTest.csproj", "{FA993B16-D89D-44BE-80E3-91F4DAEC3D8C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{C1C2C3EB-AF8A-4A23-87A4-8C63A22F64E2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi.Monolith", "WebApi.Monolith", "{C1C2C3EB-AF8A-4A23-87A4-8C63A22F64E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTest", "WebApiTest\WebApiTest.csproj", "{D944C5D5-C213-47A2-87F8-B73E46A46910}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,10 @@ Global
 		{3196A570-7C78-43FE-AAA4-41D2C283B0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3196A570-7C78-43FE-AAA4-41D2C283B0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3196A570-7C78-43FE-AAA4-41D2C283B0B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA993B16-D89D-44BE-80E3-91F4DAEC3D8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA993B16-D89D-44BE-80E3-91F4DAEC3D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA993B16-D89D-44BE-80E3-91F4DAEC3D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA993B16-D89D-44BE-80E3-91F4DAEC3D8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D944C5D5-C213-47A2-87F8-B73E46A46910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D944C5D5-C213-47A2-87F8-B73E46A46910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D944C5D5-C213-47A2-87F8-B73E46A46910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D944C5D5-C213-47A2-87F8-B73E46A46910}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +32,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3196A570-7C78-43FE-AAA4-41D2C283B0B8} = {C1C2C3EB-AF8A-4A23-87A4-8C63A22F64E2}
-		{FA993B16-D89D-44BE-80E3-91F4DAEC3D8C} = {C1C2C3EB-AF8A-4A23-87A4-8C63A22F64E2}
+		{D944C5D5-C213-47A2-87F8-B73E46A46910} = {C1C2C3EB-AF8A-4A23-87A4-8C63A22F64E2}
 	EndGlobalSection
 EndGlobal

@@ -18,20 +18,18 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
    [Fact]
    public async Task SelectAsyncUt() {
       // Arrange
-      // add 6 owners without accounts to repository
       _ownersRepository.AddRange(_seed.Owners);
-      // save changes to database
+      ShowRepository("AddOwners");
       await _dataContext.SaveAllChangesAsync();
-      // clear change tracker to avoid side effects
       _dataContext.ClearChangeTracker();
       
-      // Act
+      // Act  with tracking
       var actual = await _ownersRepository.SelectAsync();   
-      
       // Assert
-      ShowRepository("SelectAsyncUt");
       actual.Should()
-         .NotBeNull().And.HaveCount(6).And
+         .NotBeNull().And
+         .NotBeEmpty().And
+         .HaveCount(6).And
          .BeEquivalentTo(_seed.Owners);
    }
 
@@ -40,17 +38,17 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       // Arrange
       _ownersRepository.AddRange(_seed.Owners);
       await _dataContext.SaveAllChangesAsync();
-      _dataContext.ClearChangeTracker();
       var expected = new List<Owner> { _seed.Owner1, _seed.Owner2 };
-
-      // Act
-      var actual = await _ownersRepository.FilterByAsync(o => 
-         o.Name.Contains("Mustermann"));   
+      _dataContext.ClearChangeTracker();
       
+      // Act
+      var actual = 
+         await _ownersRepository.FilterByAsync(o => o.Name.Contains("Mustermann"));   
       // Assert
       ShowRepository("FilterByName");
       actual.Should()
-         .NotBeNull().And.HaveCount(2).And
+         .NotBeNull().And
+         .HaveCount(2).And
          .BeEquivalentTo(expected);
    }
 
@@ -60,20 +58,19 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       _ownersRepository.AddRange(_seed.Owners);
       await _dataContext.SaveAllChangesAsync();
       _dataContext.ClearChangeTracker();
-      
       var birthdateMin = new DateTime(1980, 01, 01).ToUniversalTime();
       var birthdateMax = new DateTime(1989, 12, 31).ToUniversalTime();
       var expected = new List<Owner> { _seed.Owner1, _seed.Owner2 };
       
       // Act
-      var actual =  await _ownersRepository.FilterByAsync(o => 
-         o.Birthdate >= birthdateMin &&
-         o.Birthdate <= birthdateMax);   
-      
+      var actual = 
+         await _ownersRepository.FilterByAsync(o => o.Birthdate >= birthdateMin &&
+                                                    o.Birthdate <= birthdateMax);   
       // Assert
       ShowRepository("FilterByBirthdate");
       actual.Should()
-         .NotBeNull().And.HaveCount(2).And
+         .NotBeNull().And
+         .HaveCount(2).And
          .BeEquivalentTo(expected);
    }
 
@@ -86,13 +83,14 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       var expected = new List<Owner> { _seed.Owner2, _seed.Owner4 };
       
       // Act
-      var actual = await _ownersRepository.FilterByAsync(o => 
-         o.Email.Contains("gmail"));   
+      var actual = 
+         await _ownersRepository.FilterByAsync(o => o.Email.Contains("gmail"));   
       
       // Assert
       ShowRepository("FilterByEmail");
       actual.Should()
-         .NotBeNull().And.HaveCount(2).And
+         .NotBeNull().And
+         .HaveCount(2).And
          .BeEquivalentTo(expected);
    }
    
@@ -107,7 +105,8 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       var expected = new List<Owner> { _seed.Owner4 };
       
       // Act
-      var actual = await _ownersRepository.FilterByAsync(o => 
+      var actual =
+         await _ownersRepository.FilterByAsync(o => 
             o.Email.Contains("gmail") &&
             o.Birthdate >= birthdateMin &&
             o.Birthdate <= birthdateMax);   
@@ -115,7 +114,8 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       // Assert
       ShowRepository("FilterByEmailAndBirthdate");
       actual.Should()
-         .NotBeNull().And.HaveCount(1).And
+         .NotBeNull().And
+         .HaveCount(1).And
          .BeEquivalentTo(expected);
    }
 
@@ -146,7 +146,7 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       
       // Act
       var actual = await _ownersRepository.FindByAsync(o => 
-         o.Name == "Max Mustermann");   
+         o.Name.Contains("Max"));   
       
       // Assert
       ShowRepository("FindByIdName");
@@ -183,8 +183,8 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       var expected = _seed.Owner4;
       
       // Act
-      var actual = await _ownersRepository.FindByAsync(o => 
-            o.Email == expected.Email);   
+      var actual = 
+         await _ownersRepository.FindByAsync(o => o.Email.Contains(expected.Email));   
       
       // Assert
       ShowRepository("FindByEmail");
@@ -202,9 +202,8 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       
       // Act
       var actual = 
-         await _ownersRepository.FindByAsync(o => 
-            o.Name == "Max Mustermann" && 
-            o.Birthdate == expected.Birthdate);   
+         await _ownersRepository.FindByAsync(o => o.Name.Contains("Max") && 
+                                     o.Birthdate == expected.Birthdate);   
       
       // Assert
       ShowRepository("FindByNameAndBirthdate");
@@ -243,8 +242,8 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       await _dataContext.SaveAllChangesAsync();
       _dataContext.ClearChangeTracker();
       
-      // Assert                         
-      var actual = await _ownersRepository.SelectAsync();   
+      // Assert                         with tracking
+      var actual = await _ownersRepository.SelectAsync(true);   
       ShowRepository("AddRangeUt");
       actual.Should().NotBeNull()
          .And.NotBeEmpty()
@@ -306,7 +305,9 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       // Assert
       ShowRepository("FilterByJoinWithTracking_WithoutJoinAsyncUt");
       actual.Should()
-         .NotBeNull().And.HaveCount(6).And
+         .NotBeNull().And
+         .NotBeEmpty().And
+         .HaveCount(6).And
          .BeOfType<List<Owner>>();
       var owners = (List<Owner>)actual;
       owners[0].Accounts.Should().HaveCount(0);
@@ -331,7 +332,8 @@ public  class OwnersRepositoryUt: BaseRepositoryUt {
       // Assert
       ShowRepository("FilterByJoinAsync_WithTracking_WithJoinUt");
       actual.Should()
-         .NotBeNull().And.HaveCount(6).And
+         .NotBeNull().And
+         .HaveCount(6).And
          .BeOfType<List<Owner>>();
      actual.Should().BeEquivalentTo(expected, options => {
         options.For(owner => owner.Accounts).Exclude(accout => accout.Owner);
