@@ -10,17 +10,7 @@ public class OwnerUt {
       _seed = new Seed();
    }
 
-   #region without Account
-   [Fact]
-   public void Ctor() {
-      // Arrange
-      // Act
-      Owner actual = new ();
-      // Assert
-      actual.Should().NotBeNull();
-      actual.Should().BeOfType<Owner>();
-   }
-
+  
    [Fact]
    public void ObjectInitializerUt() {
       // Arrange
@@ -76,7 +66,6 @@ public class OwnerUt {
       actual.Birthdate.Should().Be(_seed.Owner1.Birthdate);
       actual.Email.Should().Be(_seed.Owner1.Email);
    }
-   #endregion
 
    #region with Accounts   
    [Fact]

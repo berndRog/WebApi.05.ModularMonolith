@@ -50,23 +50,23 @@ public class OwnersController(
       };
    }
 
-   // Get owners by name as Dto
+   // Get owner by name as Dto
    // http://localhost:5100/banking/owners/name?name=abc
    [HttpGet("name")]
-   public async Task<ActionResult<IEnumerable<OwnerDto>>> GetOwnersByName(
+   public async Task<ActionResult<OwnerDto?>> GetOwnerByName(
       [FromQuery] string name
    ) {
-      logger.LogDebug("GetOwnersByName() name={name}", name);
+      logger.LogDebug("GetOwnerByName() name={name}", name);
       
       //     await ownersRepository.SelectByNameAsync(name)) switch {
-      return await ownersRepository.FilterByAsync(o => o.Name.Contains(name)) switch {
-        // return owners as Dtos
-         { } owners => Ok(mapper.Map<IEnumerable<OwnerDto>>(owners)),
+      return await ownersRepository.FindByAsync(o => o.Name == name) switch {
+         // return owners as Dtos
+         { } owners => Ok(mapper.Map<OwnerDto>(owners)),
          // return not found
-         null => NotFound("Owners with given name not found")
+         null => NotFound("Owner with given name not found")
       };
    }
-
+   
    // Get owner by email as Dto
    // http://localhost:5100/banking/owners/email?email=abc
    [HttpGet("email")]
