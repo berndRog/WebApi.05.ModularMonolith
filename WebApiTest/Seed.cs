@@ -21,7 +21,9 @@ public class Seed {
    public Account Account6{ get; }
    public Account Account7{ get; }
    public Account Account8{ get; }
-   
+
+
+   // not serialized
    public List<Owner> Owners{ get; private set; }
    public List<Account> Accounts{ get; private set; }
    #endregion
@@ -70,42 +72,42 @@ public class Seed {
       #region Accounts
       Account1 = new Account {
          Id = new Guid("01000000-0000-0000-0000-000000000000"),
-         Iban = "DE10 10000000 0000000000",
+         Iban = "DE101000000000000000",
          Balance = 2100.0
       };
       Account2 = new Account {
          Id = new Guid("02000000-0000-0000-0000-000000000000"),
-         Iban = "DE10 20000000 0000000000",
+         Iban = "DE102000000000000000",
          Balance = 2000.0
       };
       Account3 = new Account {
          Id = new Guid("03000000-0000-0000-0000-000000000000"),
-         Iban = "DE20 10000000 0000000000",
+         Iban = "DE201000000000000000",
          Balance = 3000.0
       };
       Account4 = new Account {
          Id = new Guid("04000000-0000-0000-0000-000000000000"),
-         Iban = "DE30 10000000 0000000000",
+         Iban = "DE301000000000000000",
          Balance = 2500.0
       };
       Account5 = new Account {
          Id = new Guid("05000000-0000-0000-0000-000000000000"),
-         Iban = "DE40 10000000 0000000000",
+         Iban = "DE40100000000000000000",
          Balance = 1900.0
       };
       Account6 = new Account {
          Id = new Guid("06000000-0000-0000-0000-000000000000"),
-         Iban = "DE50 10000000 0000000000",
+         Iban = "DE50100000000000000000",
          Balance = 3500.0
       };
       Account7 = new Account {
          Id = new Guid("07000000-0000-0000-0000-000000000000"),
-         Iban = "DE50 20000000 0000000000",
+         Iban = "DE50200000000000000000",
          Balance = 3100.0
       };
       Account8 = new Account {
          Id = new Guid("08000000-0000-0000-0000-000000000000"),
-         Iban = "DE60 10000000 0000000000",
+         Iban = "DE60100000000000000000",
          Balance = 4300.0
       };
       #endregion
@@ -132,6 +134,5 @@ public class Seed {
       Owner1.Add(Account2);
       return this;
    }
-   
 
 }

@@ -79,7 +79,8 @@ public class AccountsController(
       logger.LogDebug("CreateAccount iban={iban}", accountDto.Iban);
       
       // map Dto to DomainModel
-      var account = mapper.Map<Account>(accountDto);
+//    var account = mapper.Map<Account>(accountDto);
+      var account = new Account(accountDto);
       
       // check if ownerId exists
       var owner = await ownersRepository.FindByIdAsync(ownerId);
