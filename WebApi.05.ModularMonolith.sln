@@ -9,6 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{C1C2C3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTest", "WebApiTest\WebApiTest.csproj", "{D944C5D5-C213-47A2-87F8-B73E46A46910}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{73D153D6-DD53-4A55-9F2D-4EDC59A39A98}"
+	ProjectSection(SolutionItems) = preProject
+		Postman\WebApi.03.04.05.06.postman_collection.json = Postman\WebApi.03.04.05.06.postman_collection.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
